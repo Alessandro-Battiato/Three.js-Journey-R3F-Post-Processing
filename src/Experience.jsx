@@ -53,7 +53,11 @@ export default function Experience() {
                         bokehScale={6}
                     />
                 */}
-                <Drunk ref={drunkRef} {...drunkProps} />
+                <Drunk
+                    ref={drunkRef}
+                    blendFunction={BlendFunction.DARKEN}
+                    {...drunkProps}
+                />
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
             </EffectComposer>
 
