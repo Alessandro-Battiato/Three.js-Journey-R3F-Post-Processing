@@ -50,12 +50,26 @@ export default function Experience() {
 
             <mesh castShadow position-x={2} scale={1.5}>
                 <boxGeometry />
-                <meshStandardMaterial
-                    color="white"
-                    emissive="orange"
-                    emissiveIntensity={20}
-                    toneMapped={false}
-                />
+                {/*
+                    Reasons why you switched to the meshBasicMaterial instead of using the meshStandardMaterial:
+
+                    The main reason was to fix an issue mentioned by Bruno Simon where, using the meshStandardMaterial
+                    to make the cube glow, presented a problem where we had the face of the cube facing the camera which was
+                    the brightest side of them all, while the remaining sides were less bright, and meshBasicMaterial solves this issue as it doesn't care of the lights and all sides of the cube are equally bright
+
+                    In addition, meshBasicMaterial is better for performance reasons
+
+                    A drawback of meshBasicMaterial though is that it cannot use the props emissive and emissive intensity
+                    but you can still make it glow using the color with the array as provided beneath
+
+                    <meshStandardMaterial
+                        color="white"
+                        emissive="orange"
+                        emissiveIntensity={20}
+                        toneMapped={false}
+                    />
+                */}
+                <meshBasicMaterial color={[1.5, 1, 4]} toneMapped={false} />
             </mesh>
 
             <mesh
