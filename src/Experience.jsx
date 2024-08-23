@@ -5,6 +5,7 @@ import {
     ToneMapping,
     EffectComposer,
     Glitch,
+    Noise,
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { GlitchMode, BlendFunction } from "postprocessing";
@@ -30,6 +31,7 @@ export default function Experience() {
                     strength={[0.2, 0.4]}
                     mode={GlitchMode.SPORADIC}
                 />
+                <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} />
             </EffectComposer>
 
             <Perf position="top-left" />
