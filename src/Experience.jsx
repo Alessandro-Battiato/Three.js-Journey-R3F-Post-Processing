@@ -11,9 +11,12 @@ import {
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { GlitchMode, BlendFunction } from "postprocessing";
+import { useRef } from "react";
 import Drunk from "./Drunk";
 
 export default function Experience() {
+    const drunkRef = useRef();
+
     return (
         <>
             <color args={["#ffffff"]} attach="background" />
@@ -44,7 +47,7 @@ export default function Experience() {
                         bokehScale={6}
                     />
                 */}
-                <Drunk />
+                <Drunk ref={drunkRef} frequency={2} amplitude={0.1} />
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
             </EffectComposer>
 

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import DrunkEffect from "./DrunkEffect";
 
-const Drunk = () => {
-    const effect = new DrunkEffect();
+const Drunk = forwardRef(({ amplitude, frequency }, ref) => {
+    const effect = new DrunkEffect({ amplitude, frequency });
 
-    return <primitive object={effect} />;
-};
+    return <primitive object={effect} ref={ref} />;
+});
 
 export default Drunk;
