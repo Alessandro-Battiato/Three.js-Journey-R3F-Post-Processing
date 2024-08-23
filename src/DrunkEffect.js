@@ -46,7 +46,7 @@ export default class DrunkEffect extends Effect {
     }
 
     // Since we are creating a DrunkEffect for the post processing and not for R3F itself, we are not animating this using useFrame in R3F's style, rather we will animate this using the update method faithful to the postprocessing style
-    update() {
-        this.uniforms.get("offset").value += 0.02;
+    update(renderer, inputBuffer, deltaTime) {
+        this.uniforms.get("offset").value += deltaTime; // fix the framerate issue using the delta time, so that this animation works the same for everybody regardless of the PC build
     }
 }
