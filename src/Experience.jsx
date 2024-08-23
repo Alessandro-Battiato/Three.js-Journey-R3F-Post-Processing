@@ -1,13 +1,20 @@
 import { OrbitControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
-import { ToneMapping, EffectComposer } from "@react-three/postprocessing";
+import {
+    Vignette,
+    ToneMapping,
+    EffectComposer,
+} from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 
 export default function Experience() {
     return (
         <>
-            <EffectComposer>
+            {/*Multisampling solves the aliasing effect (stair like effect) if you put the value to 0 the stairs on the edges of the objects appear*/}
+            <EffectComposer multisampling={8}>
+                {/*Tone mapping MUST always remain at the very beginning*/}
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+                <Vignette offset={0.3} darkness={0.9} />
             </EffectComposer>
 
             <Perf position="top-left" />
