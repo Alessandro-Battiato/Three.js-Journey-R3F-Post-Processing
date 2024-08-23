@@ -7,6 +7,7 @@ import {
     Glitch,
     Noise,
     Bloom,
+    DepthOfField,
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { GlitchMode, BlendFunction } from "postprocessing";
@@ -33,6 +34,12 @@ export default function Experience() {
                 />
                 <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} />
                 <Bloom mipmapBlur luminanceThreshold={1.1} />
+                {/*The following effect is a bit complicated and overall bad for performances, not encouraged by Bruno Simon*/}
+                <DepthOfField
+                    focusDistance={0.025}
+                    focalLength={0.025}
+                    bokehScale={6}
+                />
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
             </EffectComposer>
 
