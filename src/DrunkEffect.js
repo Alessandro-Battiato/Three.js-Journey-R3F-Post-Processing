@@ -1,4 +1,4 @@
-import { Effect } from "postprocessing";
+import { BlendFunction, Effect } from "postprocessing";
 import { Uniform } from "three";
 
 /* 
@@ -29,7 +29,11 @@ const fragmentShader = /* glsl */ `
 `;
 
 export default class DrunkEffect extends Effect {
-    constructor({ amplitude, frequency, blendFunction }) {
+    constructor({
+        amplitude = 0,
+        frequency = 0,
+        blendFunction = BlendFunction.DARKEN, // this is to make the component Drunk easily reusable by other developers, without applying this fallback value, when rendering <Drunk /> without props all they would see is a green screen because of the filter
+    }) {
         super("DrunkEffect", fragmentShader, {
             blendFunction,
             uniforms: new Map([
