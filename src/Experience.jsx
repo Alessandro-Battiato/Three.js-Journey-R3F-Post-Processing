@@ -4,9 +4,10 @@ import {
     Vignette,
     ToneMapping,
     EffectComposer,
+    Glitch,
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
-import { BlendFunction } from "postprocessing";
+import { GlitchMode, BlendFunction } from "postprocessing";
 
 export default function Experience() {
     return (
@@ -22,6 +23,12 @@ export default function Experience() {
                     offset={0.3}
                     darkness={0.9}
                     blendFunction={BlendFunction.NORMAL}
+                />
+                <Glitch
+                    delay={[0.5, 1]}
+                    duration={[0.1, 0.3]}
+                    strength={[0.2, 0.4]}
+                    mode={GlitchMode.SPORADIC}
                 />
             </EffectComposer>
 
