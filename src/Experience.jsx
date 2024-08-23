@@ -6,6 +6,7 @@ import {
     EffectComposer,
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
+import { BlendFunction } from "postprocessing";
 
 export default function Experience() {
     return (
@@ -14,7 +15,12 @@ export default function Experience() {
             <EffectComposer multisampling={8}>
                 {/*Tone mapping MUST always remain at the very beginning*/}
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-                <Vignette offset={0.3} darkness={0.9} />
+                {/*BlendFunction has many more effects, we are just sticking to the normal one*/}
+                <Vignette
+                    offset={0.3}
+                    darkness={0.9}
+                    blendFunction={BlendFunction.NORMAL}
+                />
             </EffectComposer>
 
             <Perf position="top-left" />
