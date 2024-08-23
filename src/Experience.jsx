@@ -11,6 +11,8 @@ import { BlendFunction } from "postprocessing";
 export default function Experience() {
     return (
         <>
+            <color args={["#ffffff"]} attach="background" />
+
             {/*Multisampling solves the aliasing effect (stair like effect) if you put the value to 0 the stairs on the edges of the objects appear*/}
             <EffectComposer multisampling={8}>
                 {/*Tone mapping MUST always remain at the very beginning*/}
