@@ -11,35 +11,40 @@ import {
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { GlitchMode, BlendFunction } from "postprocessing";
+import Drunk from "./Drunk";
 
 export default function Experience() {
     return (
         <>
-            <color args={["#000000"]} attach="background" />
+            <color args={["#ffffff"]} attach="background" />
 
             {/*Multisampling solves the aliasing effect (stair like effect) if you put the value to 0 the stairs on the edges of the objects appear*/}
             <EffectComposer multisampling={8}>
                 {/*Tone mapping MUST always remain at the very beginning... or atleast this is what Bruno Simon said in the course but the BLOOM EFFECT won't work if the TONEMAPPING component comes BEFORE the BLOOM component*/}
                 {/*BlendFunction has many more effects, we are just sticking to the normal one*/}
-                <Vignette
-                    offset={0.3}
-                    darkness={0.9}
-                    blendFunction={BlendFunction.NORMAL}
-                />
-                <Glitch
-                    delay={[0.5, 1]}
-                    duration={[0.1, 0.3]}
-                    strength={[0.2, 0.4]}
-                    mode={GlitchMode.SPORADIC}
-                />
-                <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} />
-                <Bloom mipmapBlur luminanceThreshold={1.1} />
-                {/*The following effect is a bit complicated and overall bad for performances, not encouraged by Bruno Simon*/}
-                <DepthOfField
-                    focusDistance={0.025}
-                    focalLength={0.025}
-                    bokehScale={6}
-                />
+
+                {/*
+                    <Vignette
+                        offset={0.3}
+                        darkness={0.9}
+                        blendFunction={BlendFunction.NORMAL}
+                    />
+                    <Glitch
+                        delay={[0.5, 1]}
+                        duration={[0.1, 0.3]}
+                        strength={[0.2, 0.4]}
+                        mode={GlitchMode.SPORADIC}
+                    />
+                    <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} />
+                    <Bloom mipmapBlur luminanceThreshold={1.1} />
+                    The following effect is a bit complicated and overall bad for performances, not encouraged by Bruno Simon
+                    <DepthOfField
+                        focusDistance={0.025}
+                        focalLength={0.025}
+                        bokehScale={6}
+                    />
+                */}
+                <Drunk />
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
             </EffectComposer>
 
@@ -57,6 +62,7 @@ export default function Experience() {
 
             <mesh castShadow position-x={2} scale={1.5}>
                 <boxGeometry />
+                <meshStandardMaterial color="mediumpurple" toneMapped={false} />
                 {/*
                     Reasons why you switched to the meshBasicMaterial instead of using the meshStandardMaterial:
 
@@ -76,7 +82,7 @@ export default function Experience() {
                         toneMapped={false}
                     />
                 */}
-                <meshBasicMaterial color={[1.5, 1, 4]} toneMapped={false} />
+                {/*<meshBasicMaterial color={[1.5, 1, 4]} toneMapped={false} />*/}
             </mesh>
 
             <mesh
