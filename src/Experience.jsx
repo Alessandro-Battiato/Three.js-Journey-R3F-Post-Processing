@@ -6,6 +6,7 @@ import {
     EffectComposer,
     Glitch,
     Noise,
+    Bloom,
 } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { GlitchMode, BlendFunction } from "postprocessing";
@@ -13,12 +14,11 @@ import { GlitchMode, BlendFunction } from "postprocessing";
 export default function Experience() {
     return (
         <>
-            <color args={["#ffffff"]} attach="background" />
+            <color args={["#000000"]} attach="background" />
 
             {/*Multisampling solves the aliasing effect (stair like effect) if you put the value to 0 the stairs on the edges of the objects appear*/}
             <EffectComposer multisampling={8}>
-                {/*Tone mapping MUST always remain at the very beginning*/}
-                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+                {/*Tone mapping MUST always remain at the very beginning... or atleast this is what Bruno Simon said in the course but the BLOOM EFFECT won't work if the TONEMAPPING component comes BEFORE the BLOOM component*/}
                 {/*BlendFunction has many more effects, we are just sticking to the normal one*/}
                 <Vignette
                     offset={0.3}
@@ -32,6 +32,8 @@ export default function Experience() {
                     mode={GlitchMode.SPORADIC}
                 />
                 <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} />
+                <Bloom mipmapBlur luminanceThreshold={1.1} />
+                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
             </EffectComposer>
 
             <Perf position="top-left" />
@@ -48,7 +50,12 @@ export default function Experience() {
 
             <mesh castShadow position-x={2} scale={1.5}>
                 <boxGeometry />
-                <meshStandardMaterial color="mediumpurple" />
+                <meshStandardMaterial
+                    color="white"
+                    emissive="orange"
+                    emissiveIntensity={20}
+                    toneMapped={false}
+                />
             </mesh>
 
             <mesh
